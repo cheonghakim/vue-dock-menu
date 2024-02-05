@@ -1,15 +1,14 @@
 <template>
-  <menu-bar
-    :items="items"
-    :on-selected="selected"
-    :theme="{
-      primary: '#b7b7b7',
-      secondary: '#e5e5e5',
-      tertiary: '#b7b7b7',
-      textColor: '#000',
-      textHoverColor: '#fff',
-    }"
-  >
+  <menu-bar :items="items" :on-selected="selected" :theme="{
+    primary: '#b7b7b7',
+    secondary: '#e5e5e5',
+    tertiary: '#b7b7b7',
+    textColor: '#000',
+    textHoverColor: '#fff',
+  }">
+    <header>
+      <slot name="menuTitle"> </slot>
+    </header>
     <template #file>
       <img src="../assets/file.svg" alt="file" :style="style" />
     </template>
