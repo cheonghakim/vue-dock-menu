@@ -15,7 +15,7 @@
     "url": "https://github.com/prabhuignoto/vue-dock-menu"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "rollup": "rimraf ./dist && rollup -c",
     "eslint": "eslint src/**/*.vue --ext .vue --fix",
     "lint:css": "stylelint src/**/*.vue --custom-syntax postcss-html",
