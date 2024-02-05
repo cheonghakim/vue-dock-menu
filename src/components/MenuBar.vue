@@ -1,7 +1,6 @@
 <template>
-  <div
-ref="menuBarRef" :class="[dockClass, 'menu-bar-container', expandClass]" :draggable="draggable" tabindex="0"
-    :style="menuBarStyle" :showIcon="showIcon" @dragover="handleDragMove" @dragstart="handleDragStart"
+  <div ref="menuBarRef" :class="[dockClass, 'menu-bar-container', expandClass, customClass]" :draggable="draggable"
+    tabindex="0" :style="menuBarStyle" :showIcon="showIcon" @dragover="handleDragMove" @dragstart="handleDragStart"
     @dragend="handleDragEnd" @touchstart="handleDragStart" @touchmove="handleDragMove" @touchend="handleDragEnd">
     <header>
       <slot name="title"> </slot>
@@ -9,8 +8,7 @@ ref="menuBarRef" :class="[dockClass, 'menu-bar-container', expandClass]" :dragga
 
     <ul :class="[dockClass, 'menu-bar-items']" draggable="true" @dragstart="handleDragCancel">
       <li v-for="item of menuItems" :key="item.id" :class="[dockClass, 'v-dock-menu-bar-item-wrapper']">
-        <menu-bar-item
-:id="item.id" :dock="dockPosition" :menu-active="menuActive"
+        <menu-bar-item :id="item.id" :dock="dockPosition" :menu-active="menuActive"
           :menu-bar-dimensions="{ height: barHeight, width: barWidth }" :menu="item.menu" :name="item.name"
           :icon="item.icon" :menu-bar-active="menuBarActive" :show-menu="item.showMenu" :theme="theme"
           :is-touch-device="isMobileDevice" :on-selected="handleSelected" :highlight-first-element="highlightFirstElement"
@@ -53,6 +51,10 @@ export default defineComponent({
     MenuBarItem,
   },
   props: {
+    customClass: {
+      type: String,
+      default: "",
+    },
     showIcon: {
       type: Boolean,
       default: false,
@@ -141,18 +143,6 @@ export default defineComponent({
 
     const clientCoords = ref<{ x: number; y: number }>({ x: 0, y: 0 });
 
-    // activate the menu bar
-    const handleMouseEnter = () => {
-      menuBarActive.value = true;
-    };
-
-    // deactivate the menubar if active
-    const handleMouseLeave = () => {
-      if (!isMobileDevice.value && !menuActive.value) {
-        menuBarActive.value = false;
-      }
-    };
-
     const handleMenuClosure = () => {
       if (unref(menuActive) || unref(menuBarActive)) {
         menuBarActive.value = false;
@@ -179,17 +169,11 @@ export default defineComponent({
 
       // check if its a mobile device
       isMobileDevice.value = isMobile();
-      const menuBar = unref(menuBarRef);
 
       if (isMobileDevice.value) {
         addListener("touchend", handleMenuClosure);
       } else {
         addListener("click", handleMenuClosure);
-
-        if (menuBar) {
-          menuBar.addEventListener("mouseenter", handleMouseEnter);
-          menuBar.addEventListener("mouseleave", handleMouseLeave);
-        }
       }
 
       addListener("dragover", updateDragCoords);
@@ -199,17 +183,10 @@ export default defineComponent({
     onUnmounted(() => {
       remListener("dragover", updateDragCoords);
 
-      const menuBar = unref(menuBarRef);
-
       if (isMobileDevice.value) {
         remListener("touchend", handleMenuClosure);
       } else {
         remListener("click", handleMenuClosure);
-
-        if (menuBar) {
-          menuBar.removeEventListener("mouseenter", handleMouseEnter);
-          menuBar.removeEventListener("mouseleave", handleMouseLeave);
-        }
       }
 
       remListener("dragover", updateDragCoords);
@@ -304,7 +281,7 @@ export default defineComponent({
         dockPosition.value === DockPosition.LEFT ||
         dockPosition.value === DockPosition.RIGHT
       ) {
-        return menuBarActive.value ? "expanded d-flex flex-column" : "not-expanded";
+        return menuBarActive.value ? "expanded" : "not-expanded";
       } else {
         return "";
       }
@@ -365,8 +342,6 @@ export default defineComponent({
       handleDragEnd,
       handleDragMove,
       handleDragStart,
-      handleMouseEnter,
-      handleMouseLeave,
       handleOnShowMenu,
       handleSelected,
       highlightFirstElement,
