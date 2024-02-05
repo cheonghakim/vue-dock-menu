@@ -1,5 +1,6 @@
 <template>
-  <menu-bar :items="items" :on-selected="selected" :theme="{
+  <menu-bar
+:items="items" :on-selected="selected" :theme="{
     primary: '#b7b7b7',
     secondary: '#e5e5e5',
     tertiary: '#b7b7b7',
