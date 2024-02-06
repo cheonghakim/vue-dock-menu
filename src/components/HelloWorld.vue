@@ -1,14 +1,16 @@
 <template>
-  <menu-bar :items="items" :on-selected="selected" :theme="{
-    primary: '#b7b7b7',
-    secondary: '#e5e5e5',
-    tertiary: '#b7b7b7',
-    textColor: '#000',
-    textHoverColor: '#fff',
-  }" :dock="'LEFT'">
-    <template v-slot:title>
-      <div>PROM</div>
-    </template>
+  <menu-bar
+    :items="items"
+    :on-selected="selected"
+    :theme="{
+      primary: '#b7b7b7',
+      secondary: '#e5e5e5',
+      tertiary: '#b7b7b7',
+      textColor: '#000',
+      textHoverColor: '#fff',
+    }"
+    :dock="'TOP'"
+  >
     <template #file>
       <img src="../assets/file.svg" alt="file" :style="style" />
     </template>
@@ -85,6 +87,7 @@ export default defineComponent({
   },
   setup() {
     const selected = (data: SelectedItemModel) => {
+      console.log(data);
       alert(data.name + " _ " + data.path);
     };
 
@@ -103,6 +106,7 @@ export default defineComponent({
     return {
       count: 0,
       items: [
+        { name: "Test", iconSlot: "file" },
         {
           name: "file",
           menu: [

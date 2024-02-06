@@ -159,6 +159,8 @@ export default defineComponent({
     // toggle menu
     const toggleMenu = (event: MouseEvent | TouchEvent) => {
       event.stopPropagation();
+      if (!props.menu || props.menu?.length === 0)
+        return props.onSelected({ name: props.name, path: props.name });
       menuOpen.value = !menuOpen.value;
       emit("show", menuOpen.value, props.id);
     };
@@ -175,7 +177,8 @@ export default defineComponent({
         bottom?: string;
       } = {};
 
-      const { clientHeight, clientWidth } = menuBarItemRef.value as HTMLDivElement;
+      const { clientHeight, clientWidth } =
+        menuBarItemRef.value as HTMLDivElement;
 
       if (props.dock === DockPosition.LEFT) {
         newStyle.top = "0px";
