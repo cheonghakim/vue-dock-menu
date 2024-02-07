@@ -73,8 +73,8 @@
     </template>
     <!-- <template v-slot:title>
       <div style="height: 100%; width: 50px">TEST</div>
-    </template> -->
-    <!-- <template v-slot:rightArea>
+    </template>
+    <template v-slot:rightArea>
       <div style="height: 100%; width: 50px">TEST</div>
     </template> -->
   </menu-bar>

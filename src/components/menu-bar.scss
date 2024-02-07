@@ -7,6 +7,19 @@
   z-index: 9999;
   background-color: var(--menubar-bg-color);
 
+  .main-area-top-bottom {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .main-area-left-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
   &.left,
   &.right {
     height: 100%;
@@ -112,18 +125,4 @@
   100% {
     width: 50px;
   }
-}
-
-.main-area-top-bottom {
-  display: flex;
-
-  align-items: center;
-  height: 100%;
-}
-
-.main-area-left-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
