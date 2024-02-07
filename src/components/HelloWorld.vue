@@ -9,7 +9,7 @@
       textColor: '#000',
       textHoverColor: '#fff',
     }"
-    :dock="'TOP'"
+    :dock="'LEFT'"
   >
     <template #file>
       <img src="../assets/file.svg" alt="file" :style="style" />

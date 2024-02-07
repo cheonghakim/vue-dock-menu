@@ -1,27 +1,65 @@
 <template>
   <div
-ref="menuBarRef" :class="[dockClass, 'menu-bar-container', expandClass, customClass]" :draggable="draggable"
-    tabindex="0" :style="menuBarStyle" :showIcon="showIcon" @dragover="handleDragMove" @dragstart="handleDragStart"
-    @dragend="handleDragEnd" @touchstart="handleDragStart" @touchmove="handleDragMove" @touchend="handleDragEnd">
-    <header>
-      <slot name="title"> </slot>
-    </header>
+    ref="menuBarRef"
+    :class="[dockClass, 'menu-bar-container', expandClass, customClass]"
+    :draggable="draggable"
+    tabindex="0"
+    :style="menuBarStyle"
+    :showIcon="showIcon"
+    @dragover="handleDragMove"
+    @dragstart="handleDragStart"
+    @dragend="handleDragEnd"
+    @touchstart="handleDragStart"
+    @touchmove="handleDragMove"
+    @touchend="handleDragEnd"
+  >
+    <main>
+      <header>
+        <slot name="title"> </slot>
+      </header>
 
-    <ul :class="[dockClass, 'menu-bar-items']" draggable="true" @dragstart="handleDragCancel">
-      <li v-for="item of menuItems" :key="item.id" :class="[dockClass, 'v-dock-menu-bar-item-wrapper']">
-        <menu-bar-item
-:id="item.id" :dock="dockPosition" :menu-active="menuActive"
-          :menu-bar-dimensions="{ height: barHeight, width: barWidth }" :menu="item.menu" :name="item.name"
-          :icon="item.icon" :menu-bar-active="menuBarActive" :show-menu="item.showMenu" :theme="theme"
-          :is-touch-device="isMobileDevice" :on-selected="handleSelected" :highlight-first-element="highlightFirstElement"
-          :show-icon="showIcon" @deactivate="handleDeactivateMenu" @activate="handleActivateMenu"
-          @activate-next="handleActivateDir" @activate-previous="handleActivateDir" @show="handleOnShowMenu">
-          <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-            <slot :name="slot" v-bind="scope" />
-          </template>
-        </menu-bar-item>
-      </li>
-    </ul>
+      <ul
+        :class="[dockClass, 'menu-bar-items']"
+        draggable="true"
+        @dragstart="handleDragCancel"
+      >
+        <li
+          v-for="item of menuItems"
+          :key="item.id"
+          :class="[dockClass, 'v-dock-menu-bar-item-wrapper']"
+        >
+          <menu-bar-item
+            :id="item.id"
+            :dock="dockPosition"
+            :menu-active="menuActive"
+            :menu-bar-dimensions="{ height: barHeight, width: barWidth }"
+            :menu="item.menu"
+            :name="item.name"
+            :icon="item.icon"
+            :menu-bar-active="menuBarActive"
+            :show-menu="item.showMenu"
+            :theme="theme"
+            :is-touch-device="isMobileDevice"
+            :on-selected="handleSelected"
+            :highlight-first-element="highlightFirstElement"
+            :show-icon="showIcon"
+            @deactivate="handleDeactivateMenu"
+            @activate="handleActivateMenu"
+            @activate-next="handleActivateDir"
+            @activate-previous="handleActivateDir"
+            @show="handleOnShowMenu"
+          >
+            <template v-for="slot in Object.keys($slots)" #[slot]="scope">
+              <slot :name="slot" v-bind="scope" />
+            </template>
+          </menu-bar-item>
+        </li>
+      </ul>
+    </main>
+
+    <div class="right-area">
+      <slot name="rightArea"></slot>
+    </div>
   </div>
 </template>
 
@@ -212,7 +250,8 @@ export default defineComponent({
       const dragEndResult = utils.handleDragEnd(event, unref(clientCoords));
 
       if (dragEndResult) {
-        const { dragActive: dragActiveNew, dockPosition: positionNew } = dragEndResult;
+        const { dragActive: dragActiveNew, dockPosition: positionNew } =
+          dragEndResult;
 
         dragActive.value = dragActiveNew;
         dockPosition.value = positionNew;
@@ -247,6 +286,9 @@ export default defineComponent({
     //** Other handlers */
 
     const handleActivateMenu = (id?: string) => {
+      // 메뉴 펼치기전 확인
+      if (!menuItems.value || menuItems.value?.length === 0) return;
+
       menuItems.value = menuItems.value.map((item) =>
         Object.assign({}, item, {
           showMenu: item.id === id,

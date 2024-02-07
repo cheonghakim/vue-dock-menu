@@ -18,7 +18,7 @@
     <span class="menu-container" :style="menuStyle">
       <transition name="fade">
         <DockMenu
-          v-if="menuActive && showMenu"
+          v-if="menuActive && showMenu && (menu && menu.length) > 0"
           :items="menu"
           :dock="dock"
           :parent="name"
@@ -74,7 +74,7 @@ export default defineComponent({
       required: true,
     },
     menu: {
-      type: Array as PropType<MenuItemModel[]>,
+      type: Array as PropType<MenuItemModel[]> | undefined,
       required: true,
     },
     menuActive: {
@@ -159,6 +159,7 @@ export default defineComponent({
     // toggle menu
     const toggleMenu = (event: MouseEvent | TouchEvent) => {
       event.stopPropagation();
+      // 레벨 1만 사용하는 경우
       if (!props.menu || props.menu?.length === 0)
         return props.onSelected({ name: props.name, path: props.name });
       menuOpen.value = !menuOpen.value;
