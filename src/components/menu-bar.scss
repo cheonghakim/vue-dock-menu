@@ -11,13 +11,7 @@
   &.right {
     height: 100%;
     flex-direction: column;
-    align-items: flex-start;
-
-    .main-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    align-items: center;
 
     .right-area {
       width: 100%;
@@ -42,11 +36,6 @@
     width: 100%;
     align-items: center;
     left: 0;
-
-    .main-area {
-      display: flex;
-      align-items: center;
-    }
 
     .right-area {
       height: 100%;
@@ -123,4 +112,18 @@
   100% {
     width: 50px;
   }
+}
+
+.main-area-top-bottom {
+  display: flex;
+
+  align-items: center;
+  height: 100%;
+}
+
+.main-area-left-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }

@@ -13,7 +13,14 @@
     @touchmove="handleDragMove"
     @touchend="handleDragEnd"
   >
-    <main class="main-area">
+    <main
+      :class="{
+        'main-area-top-bottom':
+          dock === DockPosition.TOP || dock === DockPosition.BOTTOM,
+        'main-area-left-right':
+          dock === DockPosition.LEFT || dock === DockPosition.RIGHT,
+      }"
+    >
       <header>
         <slot name="title"> </slot>
       </header>
@@ -371,6 +378,7 @@ export default defineComponent({
     }));
 
     return {
+      DockPosition,
       activeMenuBarId,
       activeMenuSelection,
       barHeight,

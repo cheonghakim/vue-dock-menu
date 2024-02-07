@@ -9,11 +9,8 @@
       textColor: '#000',
       textHoverColor: '#fff',
     }"
-    :dock="'LEFT'"
+    :dock="'TOP'"
   >
-    <!-- <template v-slot:title>
-      <div style="height: 100%; width: 50px">TEST</div>
-    </template> -->
     <template #file>
       <img src="../assets/file.svg" alt="file" :style="style" />
     </template>
@@ -74,6 +71,12 @@
     <template #folderopen>
       <img src="../assets/folder-open.svg" alt="file" :style="style" />
     </template>
+    <!-- <template v-slot:title>
+      <div style="height: 100%; width: 50px">TEST</div>
+    </template> -->
+    <!-- <template v-slot:rightArea>
+      <div style="height: 100%; width: 50px">TEST</div>
+    </template> -->
   </menu-bar>
 </template>
 
@@ -109,9 +112,9 @@ export default defineComponent({
     return {
       count: 0,
       items: [
-        { name: "Test", iconSlot: "file" },
+        { name: "M", iconSlot: "file" },
         {
-          name: "file",
+          name: "F",
           menu: [
             { name: "New File", iconSlot: "file" },
             { name: "New Window", iconSlot: "window" },
