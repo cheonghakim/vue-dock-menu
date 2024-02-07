@@ -13,7 +13,7 @@
     @touchmove="handleDragMove"
     @touchend="handleDragEnd"
   >
-    <main>
+    <main class="main-area">
       <header>
         <slot name="title"> </slot>
       </header>

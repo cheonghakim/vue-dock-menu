@@ -11,6 +11,9 @@
     }"
     :dock="'LEFT'"
   >
+    <!-- <template v-slot:title>
+      <div style="height: 100%; width: 50px">TEST</div>
+    </template> -->
     <template #file>
       <img src="../assets/file.svg" alt="file" :style="style" />
     </template>
