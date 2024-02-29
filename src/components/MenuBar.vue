@@ -1,7 +1,7 @@
 <template>
   <div
     ref="menuBarRef"
-    :class="[dockClass, 'menu-bar-container', expandClass, customClass]"
+    :class="[dockClass, 'menu-bar-container', expandClass]"
     :draggable="draggable"
     tabindex="0"
     :style="menuBarStyle"
@@ -19,14 +19,14 @@
           dock === DockPosition.TOP || dock === DockPosition.BOTTOM,
         'main-area-left-right':
           dock === DockPosition.LEFT || dock === DockPosition.RIGHT,
+        [customClass]: true,
       }"
     >
       <header>
         <slot name="title"> </slot>
       </header>
-
       <ul
-        :class="[dockClass, 'menu-bar-items']"
+        :class="[dockClass, 'menu-bar-items', middleCustomClass]"
         draggable="true"
         @dragstart="handleDragCancel"
       >
@@ -62,11 +62,10 @@
           </menu-bar-item>
         </li>
       </ul>
+      <div class="right-area">
+        <slot name="rightArea"></slot>
+      </div>
     </main>
-
-    <div class="right-area">
-      <slot name="rightArea"></slot>
-    </div>
   </div>
 </template>
 
@@ -98,6 +97,10 @@ export default defineComponent({
     MenuBarItem,
   },
   props: {
+    middleCustomClass: {
+      type: String,
+      default: "flex-1",
+    },
     customClass: {
       type: String,
       default: "",

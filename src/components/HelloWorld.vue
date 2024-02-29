@@ -1,7 +1,7 @@
 <template>
   <menu-bar
     :items="items"
-    :on-selected="selected"
+    :on-selected="(selected as any)"
     :theme="{
       primary: '#b7b7b7',
       secondary: '#e5e5e5',
@@ -11,6 +11,8 @@
     }"
     :dock="'TOP'"
   >
+    <!-- :custom-class="'d-flex justify-space-between flex-1'"
+    :middle-custom-class="'d-flex flex-1 justify-content-center'" -->
     <template #file>
       <img src="../assets/file.svg" alt="file" :style="style" />
     </template>
@@ -187,3 +189,12 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.menu-bar-items {
+  justify-content: center !important;
+}
+.flex-1 {
+  flex: 1;
+}
+</style>

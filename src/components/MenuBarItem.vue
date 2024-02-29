@@ -12,7 +12,7 @@
       :class="[...menuBarStyle, 'name-container']"
       :style="{ color: theme.textColor }"
     >
-      <span v-if="!showIcon">{{ name }}</span>
+      <span v-if="!showIcon"> <i :class="icon"></i> {{ name }}</span>
       <span v-else> <i :class="icon"></i> </span>
     </span>
     <span class="menu-container" :style="menuStyle">
