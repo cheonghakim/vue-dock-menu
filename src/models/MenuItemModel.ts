@@ -7,4 +7,5 @@ export interface MenuItemModel {
   highlight?: boolean;
   isDivider?: boolean;
   iconSlot?: string;
+  route?: Function;
 }

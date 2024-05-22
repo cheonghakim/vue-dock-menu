@@ -196,9 +196,9 @@ export default defineComponent({
       const { path, name } = selectedItem;
 
       props.onSelected({
-        ...selectedItem,
         name,
         path: `${props.parent}>${path ? path : name}`.toLowerCase(),
+        callback: selectedItem?.route,
       });
     };
 
@@ -309,9 +309,9 @@ export default defineComponent({
           });
         } else if (menuItem) {
           props.onSelected({
-            ...menuItem,
             name: menuItem.name as string,
             path: `${props.parent}>${menuItem.name}`.toLowerCase(),
+            callback: menuItem?.route,
           });
         }
       }

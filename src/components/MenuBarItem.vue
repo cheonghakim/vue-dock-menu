@@ -129,6 +129,10 @@ export default defineComponent({
       required: false,
       default: false,
     },
+    route: {
+      type: Function,
+      default: () => {},
+    },
   },
   emits: [
     "show",
@@ -162,9 +166,9 @@ export default defineComponent({
       // 레벨 1만 사용하는 경우
       if (!props.menu || props.menu?.length === 0)
         return props.onSelected({
-          ...props,
           name: props.name,
           path: props.name,
+          callback: props?.route,
         });
       menuOpen.value = !menuOpen.value;
       emit("show", menuOpen.value, props.id);
