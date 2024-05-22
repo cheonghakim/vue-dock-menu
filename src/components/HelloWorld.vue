@@ -194,6 +194,7 @@ export default defineComponent({
 .menu-bar-items {
   justify-content: center !important;
 }
+
 .flex-1 {
   flex: 1;
 }

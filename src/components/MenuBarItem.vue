@@ -161,7 +161,11 @@ export default defineComponent({
       event.stopPropagation();
       // 레벨 1만 사용하는 경우
       if (!props.menu || props.menu?.length === 0)
-        return props.onSelected({ name: props.name, path: props.name });
+        return props.onSelected({
+          ...props,
+          name: props.name,
+          path: props.name,
+        });
       menuOpen.value = !menuOpen.value;
       emit("show", menuOpen.value, props.id);
     };
