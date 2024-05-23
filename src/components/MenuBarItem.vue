@@ -124,11 +124,11 @@ export default defineComponent({
         ({
           name,
           path,
-          callback,
+          url,
         }: {
           name: string;
           path: string;
-          callback?: Function;
+          url?: string;
         }) => void
       >,
     },
@@ -137,9 +137,9 @@ export default defineComponent({
       required: false,
       default: false,
     },
-    route: {
-      type: Function,
-      default: () => {},
+    url: {
+      type: String,
+      default: "/",
     },
   },
   emits: [
@@ -176,7 +176,7 @@ export default defineComponent({
         return props.onSelected({
           name: props.name,
           path: props.name,
-          callback: props?.route,
+          url: props?.url,
         });
       }
 

@@ -4,5 +4,5 @@ export interface SelectedItemModel {
   event: MouseEvent | KeyboardEvent;
   isParent?: boolean;
   disable?: boolean;
-  route?: Function;
+  url?: string;
 }

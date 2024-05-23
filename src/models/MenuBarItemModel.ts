@@ -6,5 +6,5 @@ export interface MenuBarItemModel {
   onSelect?: (id: string) => void;
   menu?: MenuItemModel[];
   showMenu?: boolean;
-  route?: Function;
+  url?: string;
 }

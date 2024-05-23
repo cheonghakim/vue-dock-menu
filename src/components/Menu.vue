@@ -43,7 +43,7 @@
           handleSelection({
             event: $event,
             name: item.name,
-            route: item.route,
+            url: item.url,
             isParent: !!item.menu,
             disable: item.disable,
           })
@@ -52,7 +52,7 @@
           handleSelection({
             event: $event,
             name: item.name,
-            route: item.route,
+            url: item.url,
             isParent: !!item.menu,
             disable: item.disable,
           })
@@ -149,11 +149,11 @@ export default defineComponent({
         ({
           name,
           path,
-          callback,
+          url,
         }: {
           name: string;
           path: string;
-          callback?: Function;
+          url?: string;
         }) => void
       >,
     },
@@ -208,7 +208,7 @@ export default defineComponent({
       props.onSelected({
         name,
         path: `${props.parent}>${path ? path : name}`.toLowerCase(),
-        callback: selectedItem?.route,
+        callback: selectedItem?.url,
       });
     };
 
@@ -321,7 +321,7 @@ export default defineComponent({
           props.onSelected({
             name: menuItem.name as string,
             path: `${props.parent}>${menuItem.name}`.toLowerCase(),
-            callback: menuItem?.route,
+            callback: menuItem?.url,
           });
         }
       }
