@@ -203,12 +203,12 @@ export default defineComponent({
         return;
       }
 
-      const { path, name } = selectedItem;
-
+      const { path, name, url } = selectedItem;
+      console.log(url);
       props.onSelected({
         name,
         path: `${props.parent}>${path ? path : name}`.toLowerCase(),
-        callback: selectedItem?.url,
+        url,
       });
     };
 
@@ -308,6 +308,7 @@ export default defineComponent({
     const handleKeySelection = (event: KeyboardEvent) => {
       if (highlightedIndex.value >= 0) {
         const menuItem = menuItems.value[highlightedIndex.value];
+        console.log(menuItem);
         event.stopPropagation();
 
         if (menuItem?.menu) {
@@ -321,7 +322,7 @@ export default defineComponent({
           props.onSelected({
             name: menuItem.name as string,
             path: `${props.parent}>${menuItem.name}`.toLowerCase(),
-            callback: menuItem?.url,
+            url: menuItem?.url,
           });
         }
       }

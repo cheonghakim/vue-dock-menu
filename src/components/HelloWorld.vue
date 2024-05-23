@@ -117,9 +117,7 @@ export default defineComponent({
         {
           name: "M",
           iconSlot: "file",
-          route: () => {
-            console.log("1-depth!!");
-          },
+          url: "file!",
           icon: "",
         },
         {
@@ -128,9 +126,7 @@ export default defineComponent({
             {
               name: "New File",
               iconSlot: "file",
-              route: () => {
-                console.log("2-depth!!");
-              },
+              url: "new file!",
             },
             {
               name: "New Window",
@@ -145,9 +141,7 @@ export default defineComponent({
                 {
                   name: "Settings",
                   iconSlot: "hammer",
-                  route: () => {
-                    console.log("3-depth!!");
-                  },
+                  url: "settings!",
                 },
                 {
                   name: "Themes",

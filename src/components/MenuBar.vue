@@ -15,8 +15,10 @@
   >
     <main
       :class="{
-        'main-area-top-bottom': dock === DockPosition.TOP || dock === DockPosition.BOTTOM,
-        'main-area-left-right': dock === DockPosition.LEFT || dock === DockPosition.RIGHT,
+        'main-area-top-bottom':
+          dock === DockPosition.TOP || dock === DockPosition.BOTTOM,
+        'main-area-left-right':
+          dock === DockPosition.LEFT || dock === DockPosition.RIGHT,
         [customClass]: true,
       }"
     >
@@ -41,6 +43,7 @@
             :menu="item.menu"
             :name="item.name"
             :icon="item.icon"
+            :url="item.url"
             :menu-bar-active="menuBarActive"
             :show-menu="item.showMenu"
             :theme="theme"
@@ -120,7 +123,15 @@ export default defineComponent({
     onSelected: {
       required: true,
       type: Function as PropType<
-        ({ name, path, url }: { name: string; path: string; url?: string }) => void
+        ({
+          name,
+          path,
+          url,
+        }: {
+          name: string;
+          path: string;
+          url?: string;
+        }) => void
       >,
     },
     draggable: {
@@ -258,7 +269,8 @@ export default defineComponent({
       const dragEndResult = utils.handleDragEnd(event, unref(clientCoords));
 
       if (dragEndResult) {
-        const { dragActive: dragActiveNew, dockPosition: positionNew } = dragEndResult;
+        const { dragActive: dragActiveNew, dockPosition: positionNew } =
+          dragEndResult;
 
         dragActive.value = dragActiveNew;
         dockPosition.value = positionNew;
