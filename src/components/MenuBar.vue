@@ -122,7 +122,15 @@ export default defineComponent({
     onSelected: {
       required: true,
       type: Function as PropType<
-        ({ name, path }: { name: string; path: string }) => void
+        ({
+          name,
+          path,
+          callback,
+        }: {
+          name: string;
+          path: string;
+          callback?: Function;
+        }) => void
       >,
     },
     draggable: {

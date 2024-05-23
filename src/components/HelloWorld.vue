@@ -96,7 +96,7 @@ export default defineComponent({
   setup() {
     const selected = (data: SelectedItemModel) => {
       console.log(data);
-      alert(data.name + " _ " + data.path);
+      // alert(data.name + " _ " + data.path);
     };
 
     const style = computed(() => ({
@@ -114,19 +114,41 @@ export default defineComponent({
     return {
       count: 0,
       items: [
-        { name: "M", iconSlot: "file" },
+        {
+          name: "M",
+          iconSlot: "file",
+          route: () => {
+            console.log("1-depth!!");
+          },
+          icon: "",
+        },
         {
           name: "F",
           menu: [
-            { name: "New File", iconSlot: "file" },
-            { name: "New Window", iconSlot: "window" },
+            {
+              name: "New File",
+              iconSlot: "file",
+              route: () => {
+                console.log("2-depth!!");
+              },
+            },
+            {
+              name: "New Window",
+              iconSlot: "window",
+            },
             { name: "Open File", iconSlot: "folderopen" },
             { isDivider: true },
             {
               name: "Preferences",
               iconSlot: "cog",
               menu: [
-                { name: "Settings", iconSlot: "hammer" },
+                {
+                  name: "Settings",
+                  iconSlot: "hammer",
+                  route: () => {
+                    console.log("3-depth!!");
+                  },
+                },
                 {
                   name: "Themes",
                   iconSlot: "brush",

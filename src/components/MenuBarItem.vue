@@ -121,7 +121,15 @@ export default defineComponent({
     onSelected: {
       required: true,
       type: Function as PropType<
-        ({ name, path }: { name: string; path: string }) => void
+        ({
+          name,
+          path,
+          callback,
+        }: {
+          name: string;
+          path: string;
+          callback?: Function;
+        }) => void
       >,
     },
     highlightFirstElement: {
@@ -164,12 +172,14 @@ export default defineComponent({
     const toggleMenu = (event: MouseEvent | TouchEvent) => {
       event.stopPropagation();
       // 레벨 1만 사용하는 경우
-      if (!props.menu || props.menu?.length === 0)
+      if (!props.menu || props.menu?.length === 0) {
         return props.onSelected({
           name: props.name,
           path: props.name,
           callback: props?.route,
         });
+      }
+
       menuOpen.value = !menuOpen.value;
       emit("show", menuOpen.value, props.id);
     };

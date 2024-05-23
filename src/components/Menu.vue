@@ -43,6 +43,7 @@
           handleSelection({
             event: $event,
             name: item.name,
+            route: item.route,
             isParent: !!item.menu,
             disable: item.disable,
           })
@@ -51,6 +52,7 @@
           handleSelection({
             event: $event,
             name: item.name,
+            route: item.route,
             isParent: !!item.menu,
             disable: item.disable,
           })
@@ -144,7 +146,15 @@ export default defineComponent({
     onSelected: {
       required: true,
       type: Function as PropType<
-        ({ name, path }: { name: string; path: string }) => void
+        ({
+          name,
+          path,
+          callback,
+        }: {
+          name: string;
+          path: string;
+          callback?: Function;
+        }) => void
       >,
     },
     initialHighlightIndex: {
